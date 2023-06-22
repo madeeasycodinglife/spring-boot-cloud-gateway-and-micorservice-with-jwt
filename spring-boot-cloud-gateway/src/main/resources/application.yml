@@ -1,0 +1,12 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: service-1
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/**
+          filters:
+            - AuthenticationFilter
+server:
+  port: 8082
