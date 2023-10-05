@@ -44,6 +44,34 @@ public class JwtUtils {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
+    // OR
+    // NOTE : new version 0.12.0 is not supporting but i think in future it will be fixed
+    /** 
+     *  public String generateToken(String subject) {
+     *         return Jwts.builder()
+     *                 .setId(UUID.randomUUID().toString()) // id
+     *                 .setSubject(subject) // subject
+     *                 .setIssuer("madeeasy") // provider
+     *                 .setIssuedAt(new Date(System.currentTimeMillis())) // issue time
+     *                 .setExpiration(new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(10))) // exp in minute
+     *                 .signWith(SignatureAlgorithm.HS256, getSignKey())
+     *                 .compact(); // return String
+     *     }
+     *
+     *
+     *     public Claims getClaims(String token) {
+     *         return Jwts.parser()
+     *                 .setSigningKey(getSignKey())
+     *                 .parseClaimsJws(token)
+     *                 .getBody();
+     *     }
+     *
+     *     private Key getSignKey() {
+     *         byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
+     *         return Keys.hmacShaKeyFor(keyBytes);
+     *     }
+     */
+    
     public Date getExpirationDate(String token) {
         return getClaims(token).getExpiration();
     }
